@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"crypto/aes"
 	"encoding/base64"
-	mcs "meteor/crypto-sha3"
+	"github.com/git-yongge/crypto-sha3"
 )
 
 // AesECBEncrypt
@@ -16,7 +16,7 @@ func AesECBEncrypt(origData []byte, key []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	hash := mcs.Keccak256(origData)
+	hash := sha3.Keccak256(origData)
 	padding := pkcs5Padding(origData, BlockSize)
 	encrypted := make([]byte, len(padding))
 	for bs, be := 0, cipher.BlockSize(); bs <= len(origData); bs, be = bs+cipher.BlockSize(), be+cipher.BlockSize() {
@@ -45,7 +45,7 @@ func AesECBDecrypt(encrypted []byte, key []byte) ([]byte, error) {
 	origData := pkcs5UnPadding(decrypted)
 
 	// 校验密码
-	if bytes.Equal(hash, mcs.Keccak256(origData)) {
+	if bytes.Equal(hash, sha3.Keccak256(origData)) {
 		return origData, nil
 	}
 	return nil, ErrPassword

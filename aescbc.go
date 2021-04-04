@@ -6,7 +6,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"errors"
-	sha3 "meteor/crypto-sha3"
+	"github.com/git-yongge/crypto-sha3"
 )
 
 const (
@@ -15,10 +15,10 @@ const (
 )
 
 var (
-	ErrPassword 	 = errors.New("wrong password")
-	ErrCipherText 	 = errors.New("ciphertext too short")
-	ErrPassEmpty 	 = errors.New("password cannot be empty")
-	ErrDecrypt		 = errors.New("could not decrypt key with given password")
+	ErrPassword   = errors.New("wrong password")
+	ErrCipherText = errors.New("ciphertext too short")
+	ErrPassEmpty  = errors.New("password cannot be empty")
+	ErrDecrypt    = errors.New("could not decrypt key with given password")
 )
 
 // AesCBCEncrypt CBC模式加密
